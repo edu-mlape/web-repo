@@ -4,6 +4,7 @@ import Gen.Params.ConsultForm exposing (Params)
 import Page
 import Request
 import Shared
+import UI exposing (ui)
 import View exposing (View)
 
 
@@ -60,4 +61,6 @@ subscriptions model =
 
 view : Model -> View Msg
 view model =
-    View.placeholder "ConsultForm"
+    { title = "Book a Consultation"
+    , body = ui []
+    }
