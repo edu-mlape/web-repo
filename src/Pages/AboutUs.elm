@@ -4,6 +4,7 @@ import Gen.Params.AboutUs exposing (Params)
 import Page exposing (Page)
 import Request
 import Shared
+import UI exposing (ui)
 import View exposing (View)
 
 
@@ -16,4 +17,6 @@ page shared req =
 
 view : View msg
 view =
-    View.placeholder "AboutUs"
+    { title = "Products"
+    , body = ui []
+    }

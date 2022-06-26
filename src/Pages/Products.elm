@@ -5,6 +5,7 @@ import Page
 import Request
 import Shared
 import View exposing (View)
+import UI exposing (ui, content)
 
 
 page : Shared.Model -> Request.With Params -> Page.With Model Msg
@@ -60,4 +61,6 @@ subscriptions model =
 
 view : Model -> View Msg
 view model =
-    View.placeholder "Products"
+    { title = "Products"
+    , body = ui []
+    }
