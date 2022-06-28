@@ -28,4 +28,6 @@ elm-spa watch  # runs build as you code (without the server)
 You can learn more at [elm-spa.dev](https://elm-spa.dev)
 
 ## TODO
-- [ ] Fix input of ConsultForm.elm
+- [x] Fix input of ConsultForm.elm
+- [ ] Create a consistent theme for page.
+- [ ] Add content for page.
