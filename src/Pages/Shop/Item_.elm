@@ -49,6 +49,6 @@ update msg model =
 -- VIEW
 
 
-view : Model -> View Msg
+view : Params -> Model -> View Msg
 view model =
     { title = "", body = ui [] }

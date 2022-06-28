@@ -1,6 +1,7 @@
 module Pages.ConsultForm exposing (Model, Msg, page)
 
 import Element exposing (Element, el, fill, height, width)
+import Element.Background as BG
 import Element.Input as Form
 import Gen.Params.ConsultForm exposing (Params)
 import Page
@@ -55,15 +56,49 @@ init =
 -- UPDATE
 
 
+type Field
+    = Name
+    | CompanyRole
+    | CompanyName
+    | Email
+    | MobileNumber
+    | Branch
+    | Date
+    | MeetingDescription
+
+
 type Msg
-    = FormEdited String
+    = FormEdited Field String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        FormEdited s ->
-            ( { model | name = s }, Cmd.none )
+        FormEdited field str ->
+            case field of
+                Name ->
+                    ( { model | name = str }, Cmd.none )
+
+                CompanyRole ->
+                    ( { model | role = str }, Cmd.none )
+
+                CompanyName ->
+                    ( { model | company = str }, Cmd.none )
+
+                Email ->
+                    ( { model | email = str }, Cmd.none )
+
+                MobileNumber ->
+                    ( { model | mobileNumber = str }, Cmd.none )
+
+                Branch ->
+                    ( { model | branch = str }, Cmd.none )
+
+                Date ->
+                    ( { model | date = str }, Cmd.none )
+
+                MeetingDescription ->
+                    ( { model | meetingDescription = str }, Cmd.none )
 
 
 
@@ -93,10 +128,10 @@ view model =
 form : Model -> Element Msg
 form model =
     let
-        field : String -> String -> String -> Element Msg
-        field var plDefault label =
+        field : String -> String -> String -> Field -> Element Msg
+        field var plDefault label msg =
             Form.text []
-                { onChange = \s -> FormEdited s
+                { onChange = \s -> FormEdited msg s
                 , text = var
                 , placeholder =
                     Just
@@ -112,19 +147,19 @@ form model =
                 []
                 [ UI.content Row
                     [ Element.spacing 20 ]
-                    [ field model.name "Your name" "Name"
-                    , field model.role "i.e. CEO, Owner etc." "Role"
+                    [ field model.name "Your name" "Name" Name
+                    , field model.role "i.e. CEO, Owner etc." "Role" CompanyRole
                     ]
-                , field model.company "Your company" "Company"
+                , field model.company "Your company" "Company" CompanyName
                 , UI.content Row
                     [ Element.spacing 20 ]
-                    [ field model.email "Your email" "Email"
-                    , field model.mobileNumber "+61 XXX XXX XXXX" "Your number"
+                    [ field model.email "Your email" "Email" Email
+                    , field model.mobileNumber "+61 XXX XXX XXXX" "Your number" MobileNumber
                     ]
                 , UI.content Row
                     [ Element.spacing 20 ]
-                    [ field model.branch "Where do you want to meet?" "Preferred branch"
-                    , field model.date "dd/mm/yyyy" "Meeting date"
+                    [ field model.branch "Where do you want to meet?" "Preferred branch" Branch
+                    , field model.date "dd/mm/yyyy" "Meeting date" Date
                     ]
                 ]
 
@@ -132,7 +167,7 @@ form model =
             UI.content Col
                 []
                 [ Form.multiline [ width fill, height fill ]
-                    { onChange = \t -> FormEdited t
+                    { onChange = \t -> FormEdited MeetingDescription t
                     , text = model.meetingDescription
                     , placeholder =
                         Just
@@ -143,7 +178,7 @@ form model =
                     , label = "Description" |> Element.text |> Form.labelAbove []
                     , spellcheck = True
                     }
-                , Form.button []
+                , Form.button [ Element.padding 30, Element.rgb255 128 128 0 |> BG.color ]
                     { onPress = Nothing, label = Element.text "Submit" }
                 ]
     in

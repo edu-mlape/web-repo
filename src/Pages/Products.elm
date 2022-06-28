@@ -4,7 +4,7 @@ import Element as El exposing (Element)
 import Gen.Params.Products exposing (Params)
 import Gen.Route as Route
 import Page
-import ProductApi exposing (ItemDetails, itemIcon)
+import ProductApi exposing (ItemDetails, SelectedItem(..), itemIcon, items)
 import Request
 import Shared
 import UI exposing (PageSplit(..), ui)
@@ -23,14 +23,14 @@ page shared req =
 
 
 -- INIT
-
-
-type SelectedItem
-    = OfficePack
-    | ServerPack
-    | DevPack
-    | WebPack
-    | CreativePack
+{-
+   type SelectedItem
+       = OfficePack
+       | ServerPack
+       | DevPack
+       | WebPack
+       | CreativePack
+-}
 
 
 type alias Model =
@@ -72,34 +72,7 @@ subscriptions model =
 
 catalogue : Element Msg
 catalogue =
-    let
-        smallBusiness =
-            ItemDetails "Office Pack" "" "Package for small organisations" 1000.0 "small-business-package"
-
-        serverPack =
-            ItemDetails "Server Pack" "" "" 3000.0 "server-package"
-
-        devPack =
-            ItemDetails "Developers Pack" "" "" 4000.0 "dev-package"
-
-        creativePack =
-            ItemDetails "Creativity Pack" "" "" 9000.0 "creative-package"
-
-        webPack =
-            ItemDetails "Webserver Pack" "" "" 10000.0 "web-package"
-
-        itemList =
-            [ smallBusiness, serverPack, devPack, creativePack, webPack ]
-
-        {- catalogueLink : String -> ItemDetails -> Element Msg
-           catalogueLink pagename item =
-               El.link []
-                   { url = Route.toHref <| Route.Shop__Item_ { item = pagename }
-                   , label = itemIcon item
-                   }
-        -}
-    in
-    List.map itemIcon itemList |> UI.content Row [ El.spaceEvenly, El.padding 50 ]
+    List.map itemIcon items |> UI.content Row [ El.spaceEvenly, El.padding 50 ]
 
 
 
