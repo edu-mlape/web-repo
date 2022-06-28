@@ -42,9 +42,9 @@ itemIcon item =
 
 items : List ItemDetails
 items =
-    [ ItemDetails "Office Pack" "" "Package for small organisations" 1000.0 "small-business-package"
-    , ItemDetails "Server Pack" "" "" 3000.0 "server-package"
-    , ItemDetails "Developers Pack" "" "" 4000.0 "dev-package"
-    , ItemDetails "Creativity Pack" "" "" 9000.0 "creative-package"
-    , ItemDetails "Webserver Pack" "" "" 10000.0 "web-package"
+    [ ItemDetails "Office Pack" "/assets/placeholder.jpg" "Package for small organisations" 1000.0 "small-business-package"
+    , ItemDetails "Server Pack" "/assets/placeholder.jpg" "Insert lorem ipsum" 3000.0 "server-package"
+    , ItemDetails "Developers Pack" "/assets/placeholder.jpg" "Insert lorem ipsum" 4000.0 "dev-package"
+    , ItemDetails "Creativity Pack" "/assets/placeholder.jpg" "Insert lorem ipsum" 9000.0 "creative-package"
+    , ItemDetails "Webserver Pack" "/assets/placeholder.jpg" "Insert lorem ipsum" 10000.0 "web-package"
     ]
