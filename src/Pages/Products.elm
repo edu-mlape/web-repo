@@ -23,14 +23,6 @@ page shared req =
 
 
 -- INIT
-{-
-   type SelectedItem
-       = OfficePack
-       | ServerPack
-       | DevPack
-       | WebPack
-       | CreativePack
--}
 
 
 type alias Model =
@@ -72,18 +64,16 @@ subscriptions model =
 
 catalogue : Element Msg
 catalogue =
-    List.map itemIcon items |> UI.content Row [ El.spaceEvenly, El.padding 50 ]
+    List.map itemIcon items
+        |> El.row
+            [ El.centerY
+            , El.spaceEvenly
+            , El.width El.fill
+            , El.padding 30
+            ]
 
 
 
-{- UI.content Row
-   []
-   [ El.link []
-       { url = Route.toHref <| Route.Shop__Item_ { item = "office-pack" }
-       , label = itemIcon smallBusiness
-       }
-   ]
--}
 -- VIEW
 
 

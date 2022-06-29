@@ -8,6 +8,7 @@ import Page
 import Request
 import Shared
 import UI exposing (PageSplit(..), ui)
+import UI.Theme as Theme exposing (Theme(..))
 import View exposing (View)
 
 
@@ -165,7 +166,7 @@ form model =
 
         part2 =
             UI.content Col
-                []
+                [ Element.spacing 20 ]
                 [ Form.multiline [ width fill, height fill ]
                     { onChange = \t -> FormEdited MeetingDescription t
                     , text = model.meetingDescription
@@ -178,7 +179,10 @@ form model =
                     , label = "Description" |> Element.text |> Form.labelAbove []
                     , spellcheck = True
                     }
-                , Form.button [ Element.padding 30, Element.rgb255 128 128 0 |> BG.color ]
+                , Form.button
+                    (Theme.themePreset Button
+                        ++ [ Element.padding 30, width fill ]
+                    )
                     { onPress = Nothing, label = Element.text "Submit" }
                 ]
     in

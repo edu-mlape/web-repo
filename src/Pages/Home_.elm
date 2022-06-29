@@ -11,6 +11,7 @@ import Request
 import Shared
 import Time
 import UI exposing (PageSplit(..), ui)
+import UI.Theme as Theme exposing (Theme(..))
 import View exposing (View)
 
 
@@ -105,10 +106,22 @@ banner model =
             BG.color (Element.rgb255 128 128 128)
 
         rightArrow =
-            "→" |> text |> el [ Font.bold, Font.size 30 ]
+            "→"
+                |> text
+                |> el
+                    [ Font.bold
+                    , Font.size 60
+                    , Element.padding 30
+                    ]
 
         leftArrow =
-            "←" |> text |> el [ Font.bold, Font.size 30 ]
+            "←"
+                |> text
+                |> el
+                    [ Font.bold
+                    , Font.size 60
+                    , Element.padding 30
+                    ]
 
         empowerBanner =
             UI.content Col
@@ -150,9 +163,11 @@ banner model =
     in
     UI.content Row
         []
-        [ Input.button [ Element.height fill ] { onPress = Just ChangedBanner, label = leftArrow }
+        [ Input.button (Theme.themePreset Button ++ [ Element.height fill ])
+            { onPress = Just ChangedBanner, label = leftArrow }
         , displayed
-        , Input.button [ Element.height fill ] { onPress = Just ChangedBanner, label = rightArrow }
+        , Input.button (Theme.themePreset Button ++ [ Element.height fill ])
+            { onPress = Just ChangedBanner, label = rightArrow }
         ]
 
 
@@ -163,7 +178,7 @@ news =
             \t -> Element.paragraph [ Font.size 72, Font.bold ] [ text t ]
     in
     UI.content Col
-        [ padding 10 ]
+        [ padding 10, Element.spacing 30 ]
         [ header "Celebrating our website's release."
         , Element.paragraph [] [ text "Welcome, customers! Our brand new website comes with features that ensure our services are more accessible to you." ]
         ]

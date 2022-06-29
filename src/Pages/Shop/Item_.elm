@@ -10,6 +10,7 @@ import ProductApi exposing (ItemDetails, SelectedItem(..), items)
 import Request
 import Shared
 import UI exposing (PageSplit(..), ui)
+import UI.Theme as Theme exposing (Theme(..))
 import View exposing (View)
 
 
@@ -104,16 +105,25 @@ view model =
     , body =
         ui
             [ UI.content Row
-                [ El.padding 40 ]
+                [ El.padding 40, El.spacing 40 ]
                 [ El.image [ El.width fill, El.height fill ] { src = model.item.image, description = "" }
                 , UI.content Col
                     []
-                    [ El.column [ El.spacing 20 ]
-                        [ Input.button [ El.width fill ]
+                    [ El.column [ El.spacing 40 ]
+                        [ Input.button (Theme.themePreset Button ++ [ El.width fill ])
                             { onPress = Nothing
-                            , label = El.text "Buy" |> El.el [ El.centerX, Font.bold, Font.size 40 ]
+                            , label = El.text "Buy" |> El.el [ El.centerX, Font.bold, Font.size 40, El.paddingXY 40 20 ]
                             }
-                        , model.item.name |> El.text |> El.el [ Font.bold, Font.size 30 ]
+                        , UI.content Row
+                            [ El.spaceEvenly ]
+                            [ model.item.name
+                                |> El.text
+                                |> El.el [ Font.bold, Font.size 30 ]
+                            , "$"
+                                ++ String.fromFloat model.item.cost
+                                |> El.text
+                                |> El.el [ Font.bold, Font.size 30 ]
+                            ]
                         , model.item.description |> El.text
                         ]
                     ]
